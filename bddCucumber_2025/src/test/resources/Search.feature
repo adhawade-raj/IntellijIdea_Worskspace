@@ -1,3 +1,4 @@
+@Smoke
 Feature: Amazon Product search
 
   Scenario: Amazon Search
