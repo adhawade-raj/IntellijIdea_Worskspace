@@ -27,6 +27,8 @@ buildNumber.properties
 ##############################
 ## Eclipse
 ##############################
+.idea/
+
 .settings/
 bin/
 tmp/
