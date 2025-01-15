@@ -9,6 +9,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features= "src/test/resources/",
         glue =  {"org.stepDefinations","hooks"},
         plugin = {"pretty"},
-        tags="@Smoke")
+        tags="@Registration")
 public class CukeTest {
 }
