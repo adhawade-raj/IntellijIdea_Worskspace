@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/Search.feature",
-        glue = "org.stepDefinations",
+        glue = {"org.stepDefinations","hooks"},
         plugin = {"pretty"})
 
 public class amazonTest {
