@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class Login_ScenarioOutline {
+public class Bdd05_Login_ScenarioOutline {
 
     @Given("I have a navigated to Login Page")
     public void i_have_a_navigated_to_login_page() {

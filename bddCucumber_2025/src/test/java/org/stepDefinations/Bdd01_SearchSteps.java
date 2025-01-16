@@ -1,12 +1,10 @@
 package org.stepDefinations;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class SearchSteps {
+public class Bdd01_SearchSteps {
 
     @Given("I have a search field on Amazon Page")
     public void i_have_a_search_field_on_Amazon_Page() {

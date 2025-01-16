@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ProductSteps_Tags {
+public class Bdd02_ProductSteps_Tags {
     @Given("User is on amazon home page")
     public void userIsOnAmazonHomePage() {
         System.out.println("Step 1");

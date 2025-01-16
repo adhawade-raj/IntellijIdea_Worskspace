@@ -5,9 +5,9 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/Search.feature",
+@CucumberOptions(features = "src/test/resources/Bdd01_Search.feature",
         glue = {"org.stepDefinations","hooks"},
         plugin = {"pretty"})
 
-public class amazonTest {
+public class Bdd01_amazonTest {
 }

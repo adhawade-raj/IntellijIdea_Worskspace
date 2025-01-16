@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import java.util.List;
 import java.util.Map;
 
-public class RegistrationSteps {
+public class Bdd03_RegistrationSteps {
 
 
     @Given("user is on Registration Page")

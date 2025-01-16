@@ -4,7 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class Billing_SceanrioOutline {
+public class Bdd05_Billing_SceanrioOutline {
 
     double billingAmount;
     double taxAmount;
