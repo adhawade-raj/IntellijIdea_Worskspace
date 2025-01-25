@@ -6,11 +6,11 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features", // Corrected path for features
-        glue = {"com.qa.test.stepDefinations", "com.qa.test.hooks"}, // Corrected glue paths
+        features = "src/test/resources/features",
+        glue = {"com.qa.test.steps", "com.qa.test.hooks"},
         plugin = {"pretty"},
         tags = "@Smoke",
-        dryRun = false // Set to true for a dry run to validate steps without execution
+        dryRun = false
 )
 public class TestRunner {
 }

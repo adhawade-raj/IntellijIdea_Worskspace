@@ -1,169 +1,135 @@
 package com.qa.utils;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
-import java.util.Properties;
 
+import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumBy;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
-
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
-import lombok.SneakyThrows;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 public class AndroidUtils {
 
-	AndroidDriver driver;
-	AppiumDriverLocalService service;
-	FileInputStream fis;
-	Properties prop;
-	FileUtils fileUtils;
-	String fileSeparator = File.separator;
-	String configFilePath = "D:\\Workspace\\IntelliJIdea\\appium_2025_gradle\\src\\test\\resources\\testData\\config.properties"
-			.replace("\\", fileSeparator);
-	String chromeDriverPath = "D:\\Workspace\\IntelliJIdea\\appium_2025_gradle\\src\\test\\resources\\testData\\chromedriver.exe".replace("\\",
-			fileSeparator);
-	String mainJSPath = "C:\\Users\\Raj\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"
-			.replace("\\", fileSeparator);
-	String nodeJSPath = "C:\\Program Files\\nodejs\\node.exe".replace("\\", fileSeparator);;
-	String apkFile = "D:\\Workspace\\IntelliJIdea\\appium_2025_gradle\\src\\test\\resources\\testData\\General-Store.apk"
-			.replace("\\", fileSeparator);
-	String ipAddress;
-	String port;
+    private AndroidDriver driver;
 
-	public AndroidUtils(AndroidDriver driver) {
-		this.driver = driver;
-		prop = new Properties();
-	}
+    public AndroidUtils(AndroidDriver driver) {
+        this.driver = driver;
+    }
 
-	public void initConfigProperties() {
-		// Read the file content as a string using FileUtils
-        String configContent = null;
+    public void threadSleep(int value) {
         try {
-            configContent = FileUtils.readFileToString(new File(configFilePath), "UTF-8");
-        } catch (IOException e) {
+            Thread.sleep(value);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
 
-        // Load the properties using StringReader
-		prop = new Properties();
-        try {
-            prop.load(new StringReader(configContent));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void implicitTimeout(int implicitTimeout) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitTimeout));
+    }
+
+
+    public void pageLoadTimeout(int pageLoadTimeout) {
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
+    }
+
+
+    public String getScreenshotPath(String testCaseName, AndroidDriver driver) throws IOException {
+        File source = driver.getScreenshotAs(OutputType.FILE);
+        String destinationFile = System.getProperty("user.dir") + "//reports" + testCaseName + ".png";
+        FileUtils.copyFile(source, new File(destinationFile));
+        return destinationFile;
+        // 1. capture and place in folder //2. extent report pick file and attach to
+        // report
+    }
+
+
+    /**
+     *
+     * @param Productcount
+     * @param productName
+     */
+    public void addToCart(int Productcount, String productName) {
+
+        for(int i=0; i<Productcount; i++) {
+            String productNames = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).get(i).getText();
+
+            if(productNames.equalsIgnoreCase(productName)) {
+                System.out.println("Product Name on Page : "+productNames);
+
+                driver.findElements(By.xpath("//android.widget.TextView[@resource-id=\"com.androidsample.generalstore:id/productAddCart\"]")).get(i).click();
+            }
         }
+    }
 
-        // Retrieve property values
-		ipAddress = prop.getProperty("ipAddress");
-		System.out.println("IP Address is: " + ipAddress);
 
-		port = prop.getProperty("port");
-		System.out.println("Running Port is: " + port);
-	}
+    /**
+     *
+     * @param ele
+     */
+    public void longPressAction(WebElement ele)
+    {
+        ((JavascriptExecutor)driver).executeScript("mobile: longClickGesture",
+                ImmutableMap.of("elementId",((RemoteWebElement)ele).getId(),
+                        "duration",2000));
+    }
 
-	/**
-	 * To start Appium server Automatically
-	 */
-	public void appiumServerConfiguration() {
+    /**
+     *
+     */
+    public void scrollToEndAction()
+    {
+        boolean canScrollMore;
+        do
+        {
+            canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                    "left", 100, "top", 100, "width", 200, "height", 200,
+                    "direction", "down",
+                    "percent", 3.0
 
-		initConfigProperties();
-		AppiumDriverLocalService service = new AppiumServiceBuilder().withAppiumJS(new File(mainJSPath))
-				.usingDriverExecutable(new File(nodeJSPath)).withIPAddress(ipAddress).usingPort(Integer.parseInt(port))
-				.build();
-		service.start();
-	}
+            ));
+        }while(canScrollMore);
+    }
 
-	/**
-	 * To Initialize driver and apk file
-	 * 
-	 * @return
-	 */
-	@SneakyThrows
-	public AndroidDriver initDriver() {
 
-//		appiumServerConfiguration();
 
-		initConfigProperties();
-		UiAutomator2Options options = new UiAutomator2Options();
-		options.setDeviceName(prop.getProperty("deviceName"));
-		System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-		options.setApp(apkFile);
+    public void scrollToText(String text)
+    {
+        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+text+"\"));"));
+    }
 
-		try {
-			driver = new AndroidDriver(new URL("http://" + ipAddress + ":" + port), options);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-		implicitTimeout(10);
-		return driver;
-	}
+    /**
+     *
+     * @param ele
+     * @param direction
+     */
+    public void swipeAction(WebElement ele,String direction)
+    {
+        ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement)ele).getId(),
 
-	/**
-	 * To Appium server automatically
-	 */
-	public void tearDownAppiumServer() {
-		service.stop();
-	}
+                "direction", direction,
+                "percent", 0.75
+        ));
 
-	public void browserTearDown() {
-//			tearDownAppiumServer();
-			driver.quit();
-	}
 
-	/**
-	 * Static wait - Thread.sleep
-	 * @param value
-	 */
+    }
 
-	public void threadSleep(int value) {
-		try {
-			Thread.sleep(value);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    /**
+     *
+     * @param amount
+     * @return
+     */
+    public Double getFormattedAmount(String amount)
+    {
+        Double price = Double.parseDouble(amount.substring(1));
+        return price;
 
-	/**
-	 * To wait implicitly
-	 * 
-	 * @param timeout
-	 */
-	public void implicitTimeout(int implicitTimeout) {
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitTimeout));
-	}
-
-	/**
-	 * PageLoadTimeout
-	 * 
-	 * @param pageLoadTimeout
-	 */
-	public void pageLoadTimeout(int pageLoadTimeout) {
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
-	}
-
-	/**
-	 * To Capture ScreenShot
-	 * 
-	 * @param testCaseName
-	 * @param driver
-	 * @return
-	 * @throws IOException
-	 */
-	public String getScreenshotPath(String testCaseName, AppiumDriver driver) throws IOException {
-		File source = driver.getScreenshotAs(OutputType.FILE);
-		String destinationFile = System.getProperty("user.dir") + "//reports" + testCaseName + ".png";
-		FileUtils.copyFile(source, new File(destinationFile));
-		return destinationFile;
-		// 1. capture and place in folder //2. extent report pick file and attach to
-		// report
-	}
+    }
 
 }
