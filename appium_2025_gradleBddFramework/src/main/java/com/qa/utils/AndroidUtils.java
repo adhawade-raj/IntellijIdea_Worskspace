@@ -36,45 +36,29 @@ public class AndroidUtils {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitTimeout));
     }
 
-
     public void pageLoadTimeout(int pageLoadTimeout) {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoadTimeout));
     }
-
 
     public String getScreenshotPath(String testCaseName, AndroidDriver driver) throws IOException {
         File source = driver.getScreenshotAs(OutputType.FILE);
         String destinationFile = System.getProperty("user.dir") + "//reports" + testCaseName + ".png";
         FileUtils.copyFile(source, new File(destinationFile));
         return destinationFile;
-        // 1. capture and place in folder //2. extent report pick file and attach to
-        // report
     }
 
+    public void addToCart(int productCount, String productName) {
 
-    /**
-     *
-     * @param Productcount
-     * @param productName
-     */
-    public void addToCart(int Productcount, String productName) {
-
-        for(int i=0; i<Productcount; i++) {
+        for(int i=0; i<productCount; i++) {
             String productNames = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).get(i).getText();
 
             if(productNames.equalsIgnoreCase(productName)) {
                 System.out.println("Product Name on Page : "+productNames);
-
                 driver.findElements(By.xpath("//android.widget.TextView[@resource-id=\"com.androidsample.generalstore:id/productAddCart\"]")).get(i).click();
             }
         }
     }
 
-
-    /**
-     *
-     * @param ele
-     */
     public void longPressAction(WebElement ele)
     {
         ((JavascriptExecutor)driver).executeScript("mobile: longClickGesture",
@@ -82,9 +66,6 @@ public class AndroidUtils {
                         "duration",2000));
     }
 
-    /**
-     *
-     */
     public void scrollToEndAction()
     {
         boolean canScrollMore;
@@ -106,11 +87,6 @@ public class AndroidUtils {
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+text+"\"));"));
     }
 
-    /**
-     *
-     * @param ele
-     * @param direction
-     */
     public void swipeAction(WebElement ele,String direction)
     {
         ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
@@ -119,15 +95,8 @@ public class AndroidUtils {
                 "direction", direction,
                 "percent", 0.75
         ));
-
-
     }
 
-    /**
-     *
-     * @param amount
-     * @return
-     */
     public Double getFormattedAmount(String amount)
     {
         Double price = Double.parseDouble(amount.substring(1));
