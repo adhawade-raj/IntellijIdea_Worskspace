@@ -34,10 +34,11 @@ public class RegistrationSteps {
     public void the_user_clicks_on_the_button(String string) {
         registration.submitButton();
     }
-    @Then("the user is redirected to the shopping page")
-    public void the_user_is_redirected_to_the_shopping_page() {
+    @Then("the user is redirected to the {string} page")
+    public void the_user_is_redirected_to_the_products_page(String pageName) {
         String title = registration.getTitle();
-        Assert.assertEquals(title, "test");
+        System.out.println(title);
+        Assert.assertEquals(title, pageName);
     }
 
 

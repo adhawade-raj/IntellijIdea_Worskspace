@@ -50,6 +50,8 @@ dependencies {
 test {
     useJUnit()
 
-    // Ensure Gradle can detect your custom TestRunner class
-    include '**/runner/TestRunner.class'
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        showStandardStreams = true // Optional: Logs test output in the console
+    }
 }

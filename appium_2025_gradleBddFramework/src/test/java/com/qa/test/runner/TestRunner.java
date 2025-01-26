@@ -8,7 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"com.qa.test.steps", "com.qa.test.hooks"},
-        plugin = {"pretty"},
+        plugin = {"pretty","json:target/MyReports/report.json",
+                "junit:target/MyReports/report.xml",
+                },
         tags = "@Smoke",
         dryRun = false
 )

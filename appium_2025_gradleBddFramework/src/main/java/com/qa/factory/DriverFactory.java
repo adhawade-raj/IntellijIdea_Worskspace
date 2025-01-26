@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class DriverFactory {
@@ -20,19 +21,12 @@ public class DriverFactory {
         return driver;
     }
 
-//    public AndroidUtils initializeAndroidUtils(){
-//    if(androidUtils == null){
-//        androidUtils = new AndroidUtils(getDriver());
-//    }
-//    return androidUtils;
-//    }
-    private Properties prop;
-    private String fileSeparator = File.separator;
-    private String configFilePath = "src/test/resources/testData/config.properties".replace("\\", fileSeparator);
-    private String chromeDriverPath = "src/test/resources/testData/chromedriver.exe".replace("\\", fileSeparator);
-    private String apkFile = "D:\\Workspace\\IntelliJIdea\\appium_2025_gradleBddFramework\\src\\test\\resources\\testData\\General-Store.apk".replace("\\", fileSeparator);
-    private String ipAddress;
-    private String port;
+     Properties prop;
+    String configFilePath = Paths.get("src", "test", "resources", "testData", "config.properties").toAbsolutePath().toString();
+    String chromeDriverPath = Paths.get("src", "test", "resources", "testData", "chromedriver.exe").toAbsolutePath().toString();
+    String apkFile = Paths.get("src", "test", "resources", "testData", "General-Store.apk").toAbsolutePath().toString();
+    String ipAddress;
+    String port;
 
 
     public void initConfigProperties() {
@@ -42,7 +36,6 @@ public class DriverFactory {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         // Load the properties using StringReader
         prop = new Properties();
         try {
@@ -60,13 +53,6 @@ public class DriverFactory {
     }
 
 
-
-    /**
-     * To Initialize driver and apk file
-     *
-     * @return
-     */
-
     public void initDriver() {
 
         initConfigProperties();
@@ -74,17 +60,14 @@ public class DriverFactory {
         options.setDeviceName(prop.getProperty("deviceName"));
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         options.setApp(apkFile);
-
-        try {
             System.out.println("Thread ID for setting driver: " + Thread.currentThread().getId());
+        try {
             driver = new AndroidDriver(new URL("http://" + ipAddress + ":" + port), options);
-            System.out.println("Driver set for thread: " + Thread.currentThread().getId());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Driver set for thread: " + Thread.currentThread().getId());
         androidUtils = new AndroidUtils(driver);
         androidUtils.implicitTimeout(10);
     }
-
-
 }

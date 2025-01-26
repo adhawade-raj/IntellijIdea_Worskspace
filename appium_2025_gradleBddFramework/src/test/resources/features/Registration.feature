@@ -11,5 +11,5 @@ Feature: User Registration
     And the user enters "Test User" as the name
     And the user selects "Male" from the gender dropdown
     Then the user clicks on the "Let’s Shop" button
-    And the user is redirected to the shopping page
+    And the user is redirected to the "Products" page
 
