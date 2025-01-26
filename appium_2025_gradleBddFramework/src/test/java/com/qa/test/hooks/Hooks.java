@@ -1,8 +1,6 @@
 package com.qa.test.hooks;
 
 import com.qa.factory.DriverFactory;
-import com.qa.test.runner.TestRunner;
-import io.cucumber.java.Before;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
