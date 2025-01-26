@@ -27,6 +27,9 @@ public class Registration extends BasePage{
     @AndroidFindBy(id="com.androidsample.generalstore:id/toolbar_title")
      static WebElement productPageTitle;
 
+    @AndroidFindBy(xpath="(//android.widget.Toast)[1]")
+    static WebElement toastMessage;
+
     public static void setNameField(String name) {
         nameField.sendKeys(name);
         driver.hideKeyboard();
@@ -53,5 +56,9 @@ public class Registration extends BasePage{
     public static String getTitle(){
         androidUtils.threadSleep(1000);
         return productPageTitle.getText();
+    }
+    public static String getToastMessage(){
+        androidUtils.threadSleep(1000);
+         return toastMessage.getAttribute("name");
     }
 }

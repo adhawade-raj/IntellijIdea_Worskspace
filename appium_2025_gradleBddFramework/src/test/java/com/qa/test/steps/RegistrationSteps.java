@@ -40,6 +40,13 @@ public class RegistrationSteps {
         System.out.println(title);
         Assert.assertEquals(title, pageName);
     }
+    @Then("user gets error message {string}")
+    public void user_gets_error_messege_please_enter_your_name(String errorMsg) {
+    String actualMessage = registration.getToastMessage();
+        System.out.println(actualMessage);
+        Assert.assertEquals(actualMessage, errorMsg);
+    }
+
 
 
 
