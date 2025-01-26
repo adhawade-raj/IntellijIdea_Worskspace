@@ -8,7 +8,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.appium.java_client.AppiumBy;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -103,15 +102,9 @@ public class AndroidUtils {
         return price;
 
     }
-
     public static <T> T getInjector(Class<T> classObjectRefrence) {
         Injector injector = Guice.createInjector();
         return injector.getInstance(classObjectRefrence);
-    }
-
-    public static void setPropertyConfigurator() {
-        System.setProperty("log4j.configurationFile", "src/test/resources/log4j.properties");
-        PropertyConfigurator.configure(System.getProperty("log4j.configurationFile"));
     }
 
 }

@@ -15,9 +15,6 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.26.0'
     implementation 'io.appium:java-client:9.3.0'
 
-    // REST-Assured
-    testImplementation 'io.rest-assured:rest-assured:5.5.0'
-
     // Cucumber
     testImplementation 'io.cucumber:cucumber-java:7.14.0'
     testImplementation 'io.cucumber:cucumber-junit:7.14.0'
@@ -41,22 +38,26 @@ dependencies {
 
     // Logging
     implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
-//    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
     implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
-    implementation 'log4j:log4j:1.2.17'
+
+    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'  // or a stable 1.8.x version
+    configurations.all {
+        exclude group: 'org.slf4j', module: 'slf4j-nop'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
 
     // Dependency Injection for Cucumber
     implementation 'io.cucumber:cucumber-picocontainer:7.20.1'
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.google.inject:guice:5.1.0'
 
-}
+    test {
+        useJUnit()
 
-test {
-    useJUnit()
-
-    testLogging {
-        events "PASSED", "FAILED", "SKIPPED"
-        showStandardStreams = true // Optional: Logs test output in the console
+        testLogging {
+            events "PASSED", "FAILED", "SKIPPED"
+            showStandardStreams = false // Optional: Logs test output in the console
+        }
     }
 }
