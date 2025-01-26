@@ -1,7 +1,6 @@
 package com.qa.test.runner;
 
 import com.qa.factory.DriverFactory;
-import io.cucumber.java.Before;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.BeforeClass;

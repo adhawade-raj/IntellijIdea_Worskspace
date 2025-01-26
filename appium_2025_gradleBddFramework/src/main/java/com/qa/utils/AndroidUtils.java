@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.Duration;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import io.appium.java_client.AppiumBy;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -130,6 +132,11 @@ public class AndroidUtils {
         Double price = Double.parseDouble(amount.substring(1));
         return price;
 
+    }
+
+    public static <T> T getInjector(Class<T> classObjectRefrence) {
+        Injector injector = Guice.createInjector();
+        return injector.getInstance(classObjectRefrence);
     }
 
 }

@@ -45,6 +45,9 @@ dependencies {
 
     // Dependency Injection for Cucumber
     implementation 'io.cucumber:cucumber-picocontainer:7.20.1'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.google.inject:guice:5.1.0'
+
 }
 
 test {

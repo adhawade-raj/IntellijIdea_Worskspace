@@ -1,18 +1,24 @@
 package com.qa.test.steps;
 
 import com.qa.test.implementation.Registration;
+import com.qa.utils.AndroidUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 public class RegistrationSteps {
 
-    private Registration registration;
+    @Inject
+    Registration registration;
 
     @Given("the user navigates to the registration form")
     public void the_user_navigates_to_the_registration_form() {
-        registration = new Registration();
+        Injector injector = Guice.createInjector();
+        registration = injector.getInstance(Registration.class);
     }
 
     @When("the user selects {string} from the country dropdown")
