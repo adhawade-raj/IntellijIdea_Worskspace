@@ -1,7 +1,6 @@
 package com.qa.test.steps;
 
 import com.qa.test.implementation.Registration;
-import com.qa.utils.AndroidUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
