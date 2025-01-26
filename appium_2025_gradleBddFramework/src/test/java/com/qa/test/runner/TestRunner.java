@@ -1,7 +1,7 @@
 package com.qa.test.runner;
 
 import com.qa.factory.DriverFactory;
-import com.qa.test.hooks.BasePage;
+import com.qa.test.hooks.Hooks;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.apache.log4j.PropertyConfigurator;
@@ -21,17 +21,6 @@ import org.junit.runner.RunWith;
         tags = "@Smoke",
         dryRun = false
 )
-public class TestRunner {
-    static final Logger logger = LogManager.getLogger(TestRunner.class);
+public class TestRunner extends Hooks {
 
-    @BeforeClass
-    public static void setup() {
-
-        System.setProperty("log4j.configurationFile", "src/test/resources/log4j.properties");
-        PropertyConfigurator.configure(System.getProperty("log4j.configurationFile"));
-
-        logger.info("******** Initializing Driver ********");
-        DriverFactory driverFactory = new DriverFactory();
-        driverFactory.initDriver();  // Ensure driver initialization is done before tests
-    }
 }

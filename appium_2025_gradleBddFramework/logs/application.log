@@ -6,3 +6,5 @@
 2025-01-26 19:37:37 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: *******true
 2025-01-26 19:38:01 INFO  com.qa.test.hooks.BasePage - ******** Initializing Driver ********
 2025-01-26 19:38:12 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: *******true
+2025-01-26 19:44:43 INFO  com.qa.test.hooks.Hooks - ******** Initializing Driver ********
+2025-01-26 19:44:49 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: true
