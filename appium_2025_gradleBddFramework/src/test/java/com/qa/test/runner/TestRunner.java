@@ -22,9 +22,7 @@ import org.junit.runner.RunWith;
         dryRun = false
 )
 public class TestRunner {
-
-    static final Logger logger = LogManager.getLogger(BasePage.class);
-
+    static final Logger logger = LogManager.getLogger(TestRunner.class);
 
     @BeforeClass
     public static void setup() {
