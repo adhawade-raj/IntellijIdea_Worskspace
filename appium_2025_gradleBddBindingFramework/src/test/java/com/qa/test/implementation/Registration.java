@@ -59,6 +59,6 @@ public class Registration extends BasePage{
     }
     public static String getToastMessage(){
         androidUtils.threadSleep(1000);
-         return toastMessage.getAttribute("name");
+        return toastMessage.getAttribute("name");
     }
 }

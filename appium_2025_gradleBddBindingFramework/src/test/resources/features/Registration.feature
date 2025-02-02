@@ -12,12 +12,12 @@ Feature: User Registration
 
   Scenario: Un-Successful form submission
     When the user enters "" as the name
-    And the user clicks on the "Let’s Shop" button
+    And the user clicks on the Let’s Shop button
     Then user gets error message "Please enter your name"
 
   Scenario: Successful form submission
     When the user enters "Test User" as the name
-    And the user clicks on the "Let’s Shop" button
+    And the user clicks on the Let’s Shop button
     Then the user is redirected to the "Products" page
 
 

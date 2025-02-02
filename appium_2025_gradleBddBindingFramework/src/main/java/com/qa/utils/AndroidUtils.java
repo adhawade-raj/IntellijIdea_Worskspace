@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.AppiumDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,9 +18,9 @@ import org.openqa.selenium.remote.RemoteWebElement;
 
 public class AndroidUtils {
 
-    private AndroidDriver driver;
+    private AppiumDriver driver;
 
-    public AndroidUtils(AndroidDriver driver) {
+    public AndroidUtils(AppiumDriver driver) {
         this.driver = driver;
     }
 
