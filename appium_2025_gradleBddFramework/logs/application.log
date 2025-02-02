@@ -77,3 +77,9 @@
 2025-01-26 21:13:15 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: true
 2025-01-26 21:13:56 INFO  com.qa.test.hooks.Hooks - ******** Initializing Driver ********
 2025-01-26 21:14:05 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: true
+2025-01-26 21:15:43 INFO  com.qa.test.hooks.Hooks - ******** Initializing Driver ********
+2025-01-26 21:15:51 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: true
+2025-02-02 12:43:14 INFO  com.qa.test.hooks.Hooks - ******** Initializing Driver ********
+2025-02-02 12:43:23 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: true
+2025-02-02 12:45:10 INFO  com.qa.test.hooks.Hooks - ******** Initializing Driver ********
+2025-02-02 12:45:17 INFO  com.qa.test.hooks.BasePage - ******* Driver fetched in BasePage: true

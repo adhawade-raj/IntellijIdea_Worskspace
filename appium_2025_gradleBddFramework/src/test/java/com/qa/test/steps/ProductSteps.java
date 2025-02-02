@@ -3,17 +3,18 @@ package com.qa.test.steps;
 import com.qa.test.implementation.Products;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.junit.Assert;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Inject;
+
 
 public class ProductSteps {
 
-    @Inject
     Products products;
 
+    public ProductSteps(Products products){
+        this.products = products;
+    }
 
     @Given("User I should select {int} index of product")
     public void user_i_should_select_index_of_product(int index) {
