@@ -11,14 +11,16 @@ import com.google.inject.Inject;
 
 public class ProductSteps {
 
-    @Inject
     Products products;
+
+    @Inject
+    public ProductSteps(Products products){
+        this.products=products;
+    }
 
 
     @Given("User I should select {int} index of product")
     public void user_i_should_select_index_of_product(int index) {
-        Injector injector = Guice.createInjector();
-        products = injector.getInstance(Products.class);
         products.addItemToCartByIndex(index);
     }
     @Given("user should select {int} index of product")

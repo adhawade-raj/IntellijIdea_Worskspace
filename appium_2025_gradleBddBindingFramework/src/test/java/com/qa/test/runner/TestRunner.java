@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty","json:target/MyReports/report.json",
                 "junit:target/MyReports/report.xml"
                 },
-        tags = "@Products",
+        tags = "@Smoke",
         dryRun = false
 )
 public class TestRunner extends Hooks {
